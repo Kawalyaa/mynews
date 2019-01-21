@@ -25,7 +25,10 @@ class News(Resource):
 
     def get(Resouce):
         """retrieving all news"""
-        pass
+        return make_response(jsonify({
+            "message": "ok",
+            "news": my_news
+        }), 200)
 
 
 class SingleArticleNews(Resource):
