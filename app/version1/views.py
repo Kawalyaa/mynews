@@ -19,7 +19,8 @@ class News(Resource):
         my_news.append(new)
         return make_response(jsonify({
             "msg": "Created",
-            "news_id": new['news_id']
+            "news_id": new['news_id'],
+            "date_created": new['date']
         }), 201)
 
     def get(Resouce):
