@@ -8,18 +8,18 @@ from app.version1.models import my_news
 
 class News(Resource):
     def post(self):
-        """Creating a new article"""
+        """Creating a new page"""
         req = request.get_json()
         new = {
-            "news_id": len(my_news) + 1,
+            "page_id": len(my_news) + 1,
             "tittle": req['tittle'],
-            "description": req['description'],
+            "details": req['details'],
             "date": datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
         }
         my_news.append(new)
         return make_response(jsonify({
             "msg": "Created",
-            "news_id": new['news_id'],
+            "page_id": new['page_id'],
             "date_created": new['date']
         }), 201)
 
@@ -32,15 +32,23 @@ class News(Resource):
 
 
 class SingleArticleNews(Resource):
-    """class for single news"""
-    def get(self, id):
+    """class for single page in news"""
+    def get(self, my_id):
         """Rettrieving a sing article in the news by id"""
-        pass
+        for apage in my_news:
+            if apage['page_id'] == my_id:
+                return make_response(jsonify({
+                    "message": "ok",
+                    "news_page": apage,
+                }), 200)
+        return make_response(jsonify({
+            "message": "Not found"
+        }), 404)
 
     def put(self, id):
-        """Updating a single article in the news using id"""
+        """Updating a single page in the news using id"""
         pass
 
     def deleting(self, id):
-        """Deleting a single article in the news by id"""
+        """Deleting a single page in the news by id"""
         pass
