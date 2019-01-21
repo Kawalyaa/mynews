@@ -31,12 +31,12 @@ class News(Resource):
         }), 200)
 
 
-class SingleArticleNews(Resource):
+class SinglePage(Resource):
     """class for single page in news"""
-    def get(self, my_id):
+    def get(self, page_id):
         """Rettrieving a sing article in the news by id"""
         for apage in my_news:
-            if apage['page_id'] == my_id:
+            if apage['page_id'] == page_id:
                 return make_response(jsonify({
                     "message": "ok",
                     "news_page": apage,
@@ -45,10 +45,10 @@ class SingleArticleNews(Resource):
             "message": "Not found"
         }), 404)
 
-    def put(self, id):
+    def put(self, my_id):
         """Updating a single page in the news using id"""
         pass
 
-    def deleting(self, id):
+    def deleting(self, my_id):
         """Deleting a single page in the news by id"""
         pass
