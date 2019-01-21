@@ -1,0 +1,2 @@
+# mynews
+THE NEWS REPORTER
