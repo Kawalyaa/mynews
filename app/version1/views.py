@@ -69,3 +69,18 @@ class SinglePage(Resource):
             "message": "ok",
             "apage": creat_new
         }), 201)
+        
+    def delete(self, page_id):
+        """Deleting a single page in the news by id"""
+        delete_news = [apage for apage in my_news if apage['page_id'] == page_id]
+
+        """Checking wether the page_id input is empty or page_id provided does'nt exist"""
+        if len(delete_news) == 0:
+
+            return make_response(jsonify({
+                "page_id": "Not found"
+            }), 404)
+        my_news.remove(delete_news[0])
+        return make_response(jsonify({
+            'message': 'news with page_id {} is deleted'.format(page_id)
+        }), 200)
