@@ -45,10 +45,27 @@ class SinglePage(Resource):
             "message": "Not found"
         }), 404)
 
-    def put(self, my_id):
+    def put(self, page_id):
         """Updating a single page in the news using id"""
-        pass
-
-    def deleting(self, my_id):
-        """Deleting a single page in the news by id"""
-        pass
+        for apage in my_news:
+            if apage['page_id'] == page_id:
+                req = request.get_json()
+                apage['tittle'] = req['tittle']
+                apage['details'] = req['details']
+                apage['updated'] = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
+                return make_response(jsonify({
+                    "message": "ok",
+                    "apage": apage
+                }), 200)
+        req = request.get_json()
+        creat_new = {
+            "page_id": page_id,
+            "tittle": req['tittle'],
+            "details": req['details'],
+            "updated": datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
+        }
+        my_news.append(creat_new)
+        return make_response(jsonify({
+            "message": "ok",
+            "apage": creat_new
+        }), 201)
