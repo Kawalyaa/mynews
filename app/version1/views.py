@@ -69,7 +69,7 @@ class SinglePage(Resource):
             "message": "ok",
             "apage": creat_new
         }), 201)
-        
+
     def delete(self, page_id):
         """Deleting a single page in the news by id"""
         delete_news = [apage for apage in my_news if apage['page_id'] == page_id]
